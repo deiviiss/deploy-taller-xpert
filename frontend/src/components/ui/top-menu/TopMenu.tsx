@@ -160,8 +160,12 @@ export const TopMenu = () => {
       {/* right menu */}
       <div className="flex items-center justify-center gap-[10.5px] py-2">
         <div>
-          {session && (
-            <button onClick={() => logout()} className="btn btn-danger">
+          {session ? (
+            <button onClick={async () => await logout()} className="btn btn-danger">
+              Cerrar sesión
+            </button>
+          ) : (
+            <button onClick={() => alert('Building')} className="btn btn-danger">
               Cerrar sesión
             </button>
           )}
