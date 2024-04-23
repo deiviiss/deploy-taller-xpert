@@ -57,3 +57,6 @@ export * from './dashboard/cards-dashboard/CardDashboard'
 
 // modal
 export * from './ui/modal/Modal'
+
+// providers
+export { Providers } from './providers/Providers'

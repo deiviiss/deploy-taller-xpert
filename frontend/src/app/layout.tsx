@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { textFont } from "@/config/fonts";
+import { Providers } from "@/components";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,8 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={textFont.className}>{children}</body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body className={textFont.className}>{children}</body>
+      </html>
+    </Providers>
   );
 }

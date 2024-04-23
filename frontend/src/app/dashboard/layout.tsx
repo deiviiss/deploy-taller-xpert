@@ -1,6 +1,5 @@
 import { getUserSessionServer } from "@/actions";
 import { Sidebar, TopMenu } from "@/components";
-import SessionAuthProvider from "@/context/SessionAuthProvider";
 import { redirect } from "next/navigation";
 
 export default async function RootAuth({
@@ -15,18 +14,14 @@ export default async function RootAuth({
   }
 
   return (
-    <SessionAuthProvider>
-      <main className="flex bg-white">
-        <Sidebar />
-        <div className="w-full">
-          <TopMenu />
-          <div className="p-8 pl-[17px]">
-            {children}
-          </div>
+    <main className="flex bg-white">
+      <Sidebar />
+      <div className="w-full">
+        <TopMenu />
+        <div className="p-8 pl-[17px]">
+          {children}
         </div>
-      </main>
-
-    </SessionAuthProvider>
-
+      </div>
+    </main>
   );
 }
