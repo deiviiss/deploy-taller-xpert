@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -26,8 +26,8 @@ export const LoginForm = () => {
   const {
     handleSubmit,
     register,
-    formState: { isValid },
-    formState: { errors },
+    formState: {isValid},
+    formState: {errors},
   } = useForm<LoginForm>({
     defaultValues: {},
   });
@@ -58,60 +58,59 @@ export const LoginForm = () => {
   };
 
   // Función para renderizar los mensajes de error
-  const renderErrorMessage = (field: keyof LoginForm | "general") => {
+  const renderErrorMessage = (field: keyof LoginForm | 'general') => {
     if (errorMessage[field]) {
-      return <span className="text-red-500">{errorMessage[field]}</span>;
+      return <span className='text-red-500'>{errorMessage[field]}</span>;
     }
     return null;
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8 w-[480px] max-md:w-full mx-auto max-md:p-4 h-[500px]">
+    <div className='bg-white rounded-lg shadow-lg p-8 w-[480px] max-md:w-full mx-auto max-md:p-4 h-[500px]'>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 gap-4 h-full"
-      >
+        className='grid grid-cols-1 gap-4 h-full'>
         <div>
-          <label htmlFor="email">E-mail</label>
+          <label htmlFor='email'>E-mail</label>
           <input
             className={clsx(
               "w-full h-12 p-3 rounded-lg border border-solid focus:outline-none mb-2",
               {
-                "border-red-500": errors.email || errorMessage.email,
+                'border-red-500': errors.email || errorMessage.email,
               }
             )}
-            type="email"
-            placeholder="TallerXpert@gmail.com"
-            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
+            type='email'
+            placeholder='TallerXpert@gmail.com'
+            {...register('email', {required: true, pattern: /^\S+@\S+$/i})}
           />
           {errors.email?.type === "required" && (
             <span className="text-red-500 mt-2">
               * El correo electrónico es requerido
             </span>
           )}
-          {errors.email?.type === "pattern" && (
-            <span className="text-red-500">
+          {errors.email?.type === 'pattern' && (
+            <span className='text-red-500'>
               * Ingrese un correo electrónico válido
             </span>
           )}
-          {renderErrorMessage("email")}
+          {renderErrorMessage('email')}
         </div>
 
         <div>
-          <label htmlFor="password">Contraseña</label>
+          <label htmlFor='password'>Contraseña</label>
           <input
             className={clsx(
               "w-full h-12 p-3 rounded-lg border border-solid focus:outline-none mb-2",
               {
-                "border-red-500": errors.password || errorMessage.password,
+                'border-red-500': errors.password || errorMessage.password,
               }
             )}
             type="password"
             placeholder="**********"
             {...register("password", { required: true })}
           />
-          {errors.password?.type === "required" && (
-            <span className="text-red-500">* La contraseña es requerida</span>
+          {errors.password?.type === 'required' && (
+            <span className='text-red-500'>* La contraseña es requerida</span>
           )}
           {renderErrorMessage("password")}
         </div>
@@ -134,12 +133,11 @@ export const LoginForm = () => {
             height={20} src="/google.svg" alt="google" />
         </button>
 
-        <div className="text-center">
+        <div className='text-center'>
           No tienes una cuenta?
           <Link
-            href={"/auth/new-account"}
-            className="text-blue-500 ml-2 border-b-[1px] border-b-blue-500"
-          >
+            href={'/auth/new-account'}
+            className='text-blue-500 ml-2 border-b-[1px] border-b-blue-500'>
             Crear una cuenta
           </Link>
         </div>
@@ -147,9 +145,9 @@ export const LoginForm = () => {
 
       {/* Modal de éxito */}
       {showSuccessModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg">
-            <h2 className="text-lg font-bold mb-4">
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+          <div className='bg-white p-8 rounded-lg'>
+            <h2 className='text-lg font-bold mb-4'>
               ¡Inicio de sesión exitoso!
             </h2>
             <p>Ha iniciado sesión correctamente.</p>

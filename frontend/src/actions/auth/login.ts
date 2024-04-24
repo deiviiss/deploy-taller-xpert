@@ -10,7 +10,7 @@ interface LoginForm {
 export async function authenticate(
   formData: LoginForm
 ) {
-
+  console.log('formData: ', formData)
   try {
     await signIn('credentials', {
       email: formData.email,
@@ -20,6 +20,7 @@ export async function authenticate(
 
     return 'SuccessSignin'
   } catch (error) {
+    console.log('Error: ', error)
     console.error(error)
     return 'CredentialsSigninFail'
   }

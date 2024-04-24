@@ -27,35 +27,7 @@ export default function OrdersPage() {
   return (
     <div>
       <div className="flex flex-row justify-between mb-7">
-        <div className="flex flex-row justify-center items-center gap-2">
-          <Orders />
-          <Title title="Nueva Orden" />
-        </div>
-        <p>Fecha de Ingreso: {day}/{month}/{year}</p>
-      </div>
-      <div className="flex flex-row justify-center gap-4">
-        <div className="flex flex-col gap-4">
-          {/* Comentado para evitar error al hacer build */}
-          {/* <NewClient /> */}
-          <p className="text-base font-bold mt-7 mb-4">Articulos agregados</p>
-          <div className="flex flex-col gap-4 h-40">
-            {products.length > 0
-              ?
-              <>
-                ({products?.map((product, index) =>
-                  <CardItem key={index} product={product} />
-                )})
-              </>
-              : <p>Aún no hay contenido agregado</p>
-            }
-          </div>
-          <div className="flex flex-row gap-2">
-            <Button title="Guardar" onClick={guardarOrden} />
-            <Button title="Cancelar" onClick={cancelarOrden} />
-          </div>
-        </div>
-        {/* <NewItem setProducts={setProducts}/> */}
-        {/* Comentado para evitar error al hacer build */}
+        
       </div>
     </div>
   );

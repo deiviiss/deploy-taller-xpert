@@ -5,5 +5,7 @@ export interface Technician {
   phone: string
   email: string
   password: string
-  avatar?: string
+  rol: string
+  photo_url?: string
+  is_active: boolean
 }

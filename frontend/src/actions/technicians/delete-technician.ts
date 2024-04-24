@@ -1,18 +1,26 @@
 'use server'
 
-import { technicians } from '../seed'
 import { revalidatePath } from "next/cache";
+import { getUserSessionServer } from "@/actions";
 
 export const deleteTechnician = async (id: string) => {
   try {
-    const index = technicians.findIndex(technician => technician.id === id)
+    const user = await getUserSessionServer()
 
-    if (index === -1) {
-      return { ok: false }
-    }
+    if (!user) return { ok: false }
 
-    technicians.splice(index, 1)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        }
+      }
+    );
 
+    if (!response.ok) return { ok: false }
 
     revalidatePath('/dashboard/technicians')
     return { ok: true }

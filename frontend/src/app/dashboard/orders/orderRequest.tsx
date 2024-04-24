@@ -1,36 +1,42 @@
+'use server'
 
-export const getAllReparation = async (session: any) => {
-  console.log(session)
+import { getUserSessionServer } from "@/actions";
+
+export const getAllReparation = async () => {
+  const user = await getUserSessionServer()
+
+  if (!user) return []
+
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/reparation`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.user?.token}`,
+        Authorization: `Bearer ${user.token}`,
       }
     })
-    console.log(response)
-    const data = await response.json();
-    return data;
+
+    const orders = await response.json();
+    return orders;
 
   } catch (error) {
     console.log(error)
   }
 };
 
-export const createReparation = async (session: any, client: any, products: any) => {
-  try {
-    await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/reparation`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.user?.token}`,
-      },
-      body: JSON.stringify({
-        client: client,
-        products: products
-      })
-    })
+export const createReparation = async (session : any, client : any, products : any) => {
+    try{
+        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/reparation`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${session?.user?.token}`,
+            },
+            body: JSON.stringify({
+                client: client,
+                products: products
+            })
+        })
 
   } catch (error) {
     console.log(error)

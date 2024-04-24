@@ -1,25 +1,49 @@
 'use server'
 
 import { Technician } from "@/interfaces";
-import { technicians } from '../seed'
 import { revalidatePath } from "next/cache";
+import { getUserSessionServer } from "@/actions";
 
-type TechnicianWithoutId = Omit<Technician, 'id'>;
+type TechnicianWithoutId = Omit<Technician, 'id' | 'rol' | 'is_active'>
 
 export const editTechnician = async (data: TechnicianWithoutId, id: string) => {
   try {
+    const user = await getUserSessionServer()
 
-    const updateTechncian = technicians.find(technician => technician.id === id)
+    if (!user) return { ok: false }
 
-    if (!updateTechncian) {
-      return { ok: false }
-    }
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({
+          fullName: data.fullName,
+          email: data.email,
+          password: data.password
+        }),
+      }
+    );
 
-    updateTechncian.fullName = data.fullName
-    updateTechncian.email = data.email
-    updateTechncian.password = data.password
-    updateTechncian.phone = data.phone
-    updateTechncian.address = data.address
+    if (!response.ok) return { ok: false }
+    //! AQUI SOLO TENGO EL ID DEL TECNICO, NECESITO EDITAR EL PROFILE DEL TECNICO, PERO EL ENDPOINT DE PROFILE NECESITA EL ID DEL PROFILE, NO DEL USUARIO
+    // const responseProfile = await fetch(
+    //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/profile/${id}`,
+    //   {
+    //     method: "PATCH",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${user.token}`,
+    //     },
+    //    body: JSON.stringify({
+    //      phone: data.phone,
+    //      address: data.address
+    //    }),
+    //   }
+    // );
 
     revalidatePath('/dashboard/technicians')
     return { ok: true }

@@ -1,6 +1,6 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": ["next", "prettier"],
   "rules": {
-    "no-use-before-define": ["error", { "variables": true }]
+    "no-use-before-define": ["error", { "functions": false, "classes": false, "variables": false }]
   }
 }

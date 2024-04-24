@@ -6,8 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { deleteReparation, getAllReparation } from "./orderRequest";
-import { Reparation } from "./interface";
-
+import { Products, Reparation } from "./interface";
 
 export default function OrdersPage() {
 
@@ -19,7 +18,7 @@ export default function OrdersPage() {
   useEffect(() => {
     const dataReparation = async () => {
       try {
-        const initialData = await getAllReparation(session)
+        const initialData = await getAllReparation()
         setReparations(initialData)
         setLoading(false)
       } catch (error) {
@@ -33,14 +32,14 @@ export default function OrdersPage() {
   const handleDeleteOrder = async (orderId: string) => {
     try {
       await deleteReparation(orderId, session);
-      const updateData = await getAllReparation(session)
+      const updateData = await getAllReparation()
       setReparations(updateData)
     } catch (error) {
       console.error("Error al eliminar la orden: ", error)
     }
   }
 
-  const filterReparations = reparations.filter(reparation => {
+  const filterReparations = reparations?.filter((reparation) => {
     return (
       reparation.ot_number.includes(filter) ||
       reparation.client.fullName.toLowerCase().includes(filter.toLocaleLowerCase())
@@ -57,7 +56,7 @@ export default function OrdersPage() {
         <CardOrdersTitle />
         {loading
           ? (<p>Cargando...</p>)
-          : (filterReparations.length > 0
+          : (filterReparations && filterReparations.length > 0
             ? (
               <div className="flex flex-col gap-4 overflow-auto pb-2">
                 {filterReparations.map((reparation, index) =>

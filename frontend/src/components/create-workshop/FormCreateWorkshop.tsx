@@ -21,15 +21,15 @@ interface WorkshopForm {
 const specializedFields = [
   {
     id: 1,
-    name: 'Mecánica'
-  },
-  {
-    id: 2,
     name: 'Electricidad'
   },
   {
+    id: 2,
+    name: 'Mecánica'
+  },
+  {
     id: 3,
-    name: 'Carpintería'
+    name: 'Carpinteria'
   },
   {
     id: 4,
@@ -38,6 +38,22 @@ const specializedFields = [
   {
     id: 5,
     name: 'Jardinería'
+  },
+  {
+    id: 6,
+    name: 'Informática'
+  },
+  {
+    id: 7,
+    name: 'Telefonía'
+  },
+  {
+    id: 8,
+    name: 'Electrónica'
+  },
+  {
+    id: 9,
+    name: 'Varios'
   }
 ]
 
@@ -63,7 +79,6 @@ export const FormCreateWorkshop = () => {
     }
   };
 
-
   const { handleSubmit, register, formState: { isValid }, formState: { errors } } = useForm<WorkshopForm>({
     defaultValues: {}
   })
@@ -74,7 +89,7 @@ export const FormCreateWorkshop = () => {
 
     const formData = {
       ...data,
-      logoImage: image
+      logoImage: 'https://via.placeholder.com/150'
     }
 
     // server action

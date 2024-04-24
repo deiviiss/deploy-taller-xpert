@@ -74,14 +74,13 @@ export const FormCreateTechnician = ({ isFormAviable, setIsFormAviable, isEditTe
         setErrorMessage('No se pudo crear usuario')
         return
       }
-
     }
 
     if (technician && isEditTechnician) {
       // server action
       const rta = await editTechnician(data, technician.id)
       if (!rta.ok) {
-        setErrorMessage('No se pudo crear usuario')
+        setErrorMessage('No se pudo editar usuario')
         return
       }
 
