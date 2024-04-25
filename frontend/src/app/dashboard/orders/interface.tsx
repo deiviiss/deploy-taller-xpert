@@ -24,7 +24,6 @@ export interface Products {
     serial_number: string;
     issue_detail: string;
     note: string;
-    state: string;
     warranty_date?: string;
     warranty_invoice_number?: string;
     revision_cost: string;

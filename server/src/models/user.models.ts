@@ -1,5 +1,5 @@
-import { AllowNull, BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasOne, IsEmail, Model, Table, Unique } from 'sequelize-typescript'
-import { Client, Profile, Reparation } from '.';
+import { AllowNull, BeforeCreate, BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasOne, IsEmail, Model, Table, Unique } from 'sequelize-typescript'
+import { Client, Profile, Reparation, Workshop } from '.';
 
 @Table({
 	timestamps: false,
@@ -51,6 +51,14 @@ export class User extends Model<User> {
 	@HasOne(() => Profile)
 	profile!: Profile
 
+	@HasOne(() => Workshop)
+	workshop!: Workshop
+
 	@HasOne(() => Reparation)
 	reparation!: Reparation
+
+	@BeforeCreate
+    static async capitalizeAttributes(instance: User) {
+        instance.email = instance.email.toLowerCase();
+    }
 }

@@ -67,7 +67,6 @@ export const TechnicianGrid = ({ technicians }: Props) => {
 
                     <Image src='/avatarTechnician1.png' alt="avatar" width={50} height={50} className="rounded-full" />
 
-
                     <p className="text-black">{technician.fullName}</p>
 
                     <div className="flex gap-2">

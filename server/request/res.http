@@ -1,66 +1,239 @@
-### GET
-GET http://localhost:8080/api/user
+# ### GET
+# GET http://localhost:8080/api/
 
-### POST
-POST http://localhost:8080/api/user
+# ### POST
+# POST http://localhost:8080/api/user
+# Content-Type: application/json
+
+# {
+#   "email": "usuario1",
+#   "password": "password usuario1",
+#   "clientId": "08c0b65e-afdb-4bc6-b6a1-b1808e404cd0"
+# }
+
+# ############# CLIENT
+
+# ### GET ALL
+# GET http://localhost:8080/api/client/
+
+# ### GET BY ID
+# GET http://localhost:8080/api/client/08c0b65e-afdb-4bc6-b6a1-b1808e404cd0
+
+# ### POST
+# POST http://localhost:8080/api/client
+# Content-Type: application/json
+
+# {
+#   "fullName": "nuevo cliente1",
+#   "address": "direccion nueva",
+#   "dni": 12265678,
+#   "city": "ciudad nueva",
+#   "phone": 12345678,
+#   "email": "email2nuevo@gmail.com"
+# }
+
+# ### UPDATE BY ID
+# PATCH http://localhost:8080/api/client/08c0b65e-afdb-4bc6-b6a1-b1808e404cd0
+# Content-Type: application/json
+
+# {
+#   "name": "update cliente1",
+#   "address": "direccion nueva",
+# }
+
+# ### DELETE BY ID
+# DELETE http://localhost:8080/api/client/08c0b65e-afdb-4bc6-b6a1-b1808e404cd0
+
+
+# ########### SUPPLIER
+
+# ### GET ALL
+# GET http://localhost:8080/api/supplier/
+
+# ### POST
+# POST http://localhost:8080/api/supplier
+# Content-Type: application/json
+
+# {
+#   "name": "Honda",
+#   "cuit": 10786,
+#   "address": "Asturias 916",
+#   "city": "Buenos Aires",
+#   "phone": "+51789876557",
+#   "email": "hondaselect@gmail.com",
+#   "seller_name": "Luana Especi",
+#   "categories": {"hola":"hola"}
+# }
+
+#### POST USER
+POST http://localhost:8080/api/register
 Content-Type: application/json
 
 {
-  "email": "usuario1",
-  "password": "password usuario1",
-  "clientId": "08c0b65e-afdb-4bc6-b6a1-b1808e404cd0"
+  "fullName": "Luis Angel",
+  "email": "melcabo954@gmail.com",
+  "password": "123456"
 }
 
-############# CLIENT
+#### POST login
+POST http://localhost:8080/api/signin
+Content-Type: application/json
 
-### GET ALL
-GET http://localhost:8080/api/client/
+{
+  "email": "melcabo954@gmail.com",
+  "password": "123456"
+}
 
-### GET BY ID
-GET http://localhost:8080/api/client/08c0b65e-afdb-4bc6-b6a1-b1808e404cd0
-
-### POST
+#### POST client
 POST http://localhost:8080/api/client
 Content-Type: application/json
 
 {
-  "fullName": "nuevo cliente1",
-  "address": "direccion nueva",
-  "dni": 12265678,
-  "city": "ciudad nueva",
-  "phone": 12345678,
-  "email": "email2nuevo@gmail.com"
+  "fullName": "Chuck Norris",
+  "dni": 55123987,
+  "address": "Random Av 3245",
+  "city": "Random City",
+  "phone": 123456789,
+  "email": "client@client.com"
 }
 
-### UPDATE BY ID
-PATCH http://localhost:8080/api/client/08c0b65e-afdb-4bc6-b6a1-b1808e404cd0
+#### GET REPARATION
+GET https://s14-36-t-node-react.onrender.com/api/reparation/4df77d2b-04a3-4f00-858a-ed10fa0e19a2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjY5ZWZlLTFiNGMtNGQ2Ny05NTMyLWVhOTk4MzFlZDEwMSIsImlhdCI6MTcxMzk4NDczM30.y75Niy4GLOPXh6_qzYuE7_RQAk8DNaHCY9Odlysd9xs
+
+#### GET REPARATION
+GET https://s14-36-t-node-react.onrender.com/api/client/2d3ea020-4936-4dc4-b9bb-8106a291b048
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjY5ZWZlLTFiNGMtNGQ2Ny05NTMyLWVhOTk4MzFlZDEwMSIsImlhdCI6MTcxMzk4NDczM30.y75Niy4GLOPXh6_qzYuE7_RQAk8DNaHCY9Odlysd9xs
+
+
+
+
+#### GET CLIENT
+GET http://localhost:8080/api/client/530c11ef-24e2-4fb1-805f-7445833100e9
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5MGJiZmVhLWEzOTctNGUwNy1hNmRkLTFiMzVkZGNhMThlZiIsImlhdCI6MTcxMzc0ODM1OH0.vNGAkFkrU24Y0t91wRPuMDKMisbb6TxNKOteTBgp7ZU
+
+#### POST REPARATION
+POST https://s14-36-t-node-react.onrender.com/api/reparation
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5MGJiZmVhLWEzOTctNGUwNy1hNmRkLTFiMzVkZGNhMThlZiIsImlhdCI6MTcxMzc0ODM1OH0.vNGAkFkrU24Y0t91wRPuMDKMisbb6TxNKOteTBgp7ZU
+
+# {
+#   "id": "5e269efe-1b4c-4d67-9532-ea99831ed101",
+#   "fullName": "Luis Angel",
+#   "email": "melcabo954@gmail.com",
+#   "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+#   "rol": "admin",
+#   "is_active": true,
+#   "workshop": null,
+#   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMjY5ZWZlLTFiNGMtNGQ2Ny05NTMyLWVhOTk4MzFlZDEwMSIsImlhdCI6MTcxMzk4NDczM30.y75Niy4GLOPXh6_qzYuE7_RQAk8DNaHCY9Odlysd9xs"
+# }
 
 {
-  "name": "update cliente1",
-  "address": "direccion nueva",
+  "client": {
+    "fullName": "Mariana",
+    "dni": 45874545,
+    "address": "Rambla 33",
+    "city": "Barcelona",
+    "phone": "5492616828403",
+    "email": "marpotichkin@gmail.com"
+  },
+  "products": [
+    {
+      "product_name": "TV",
+      "product_category": "Electrodométicos",
+      "brand": "LG",
+      "model": "LGA484754",
+      "serial_number": "AZERTYUIOPLKJH",
+      "detail": "No mira el televisor por favor",
+      "issue_detail": "El tv no tiene volumen",
+      "revision_cost": 50,
+      "warranty_date": "2024-05-01",
+      "warranty_invoice_number": "R01-458454"
+    },
+    {
+      "product_name": "Radio",
+      "product_category": "Electrodométicos",
+      "brand": "SONY",
+      "model": "SNY484754",
+      "serial_number": "AZEFTYUIOPLKJH",
+      "detail": "No mira el televisor por favor",
+      "issue_detail": "Sin sonido",
+      "revision_cost": 40,
+      "warranty_date": "2024-05-01",
+      "warranty_invoice_number": "R02-458454"
+    }
+  ]
 }
 
-### DELETE BY ID
-DELETE http://localhost:8080/api/client/08c0b65e-afdb-4bc6-b6a1-b1808e404cd0
+#### POST REPARATION
+# POST http://localhost:8080/api/reparation
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5MGJiZmVhLWEzOTctNGUwNy1hNmRkLTFiMzVkZGNhMThlZiIsImlhdCI6MTcxMzc0ODM1OH0.vNGAkFkrU24Y0t91wRPuMDKMisbb6TxNKOteTBgp7ZU
 
+# {
+#   "client": {
+#     "fullName": "Sony",
+#     "dni": 45874545,
+#     "address": "Rambla 33",
+#     "city": "Barcelona",
+#     "phone": "5492616828403",
+#     "email": "marpotichkin@gmail.com"
+#   },
+#   "products": [
+#     {
+#       "product_name": "TV",
+#       "product_category": "Electrodométicos",
+#       "brand": "LG",
+#       "model": "LGA484754",
+#       "serial_number": "AZERTYUIOPLKJH",
+#       "detail": "No mira el televisor por favor",
+#       "issue_detail": "El tv no tiene volumen",
+#       "revision_cost": 50,
+#       "warranty_date": "2024-05-01",
+#       "warranty_invoice_number": "R01-458454"
+#     },
+#     {
+#       "product_name": "Radio",
+#       "product_category": "Electrodométicos",
+#       "brand": "SONY",
+#       "model": "SNY484754",
+#       "serial_number": "AZEFTYUIOPLKJH",
+#       "detail": "No mira el televisor por favor",
+#       "issue_detail": "Sin sonido",
+#       "revision_cost": 40,
+#       "warranty_date": "2024-05-01",
+#       "warranty_invoice_number": "R02-458454"
+#     }
+#   ]
+# }
 
-########### SUPPLIER
+#### GET REPARATION
+GET http://localhost:8080/api/reparation/09087aab-5844-4326-933e-d4bd3095d8ac
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ5MGJiZmVhLWEzOTctNGUwNy1hNmRkLTFiMzVkZGNhMThlZiIsImlhdCI6MTcxMzc0ODM1OH0.vNGAkFkrU24Y0t91wRPuMDKMisbb6TxNKOteTBgp7ZU
 
-### GET ALL
-GET http://localhost:8080/api/supplier/
+#### GET REPARATION
+GET http://localhost:8080/api/reparation/pdf/00000001
 
-### POST
-POST http://localhost:8080/api/supplier
-Content-Type: application/json
+#### SEND PDF REPARATION x correo and whatsapp
+GET http://localhost:8080/api/reparation/sendPdf/00000001
 
-{
-  "name": "Honda",
-  "cuit": 10786,
-  "address": "Asturias 916",
-  "city": "Buenos Aires",
-  "phone": "+51789876557",
-  "email": "hondaselect@gmail.com",
-  "seller_name": "Luana Especi",
-  "categories": {"hola":"hola"}
-}
+#### OBTERNER URI MP Y SEND POR EMAIL Y WHATSAPP
+GET https://s14-36-t-node-react.onrender.com/api/product/chekout/e68065af-5621-4dfd-bd36-5833ada5469a
+
+### credenciales de pago:
+
+# 5031 7557 3453 0604
+# 123
+# 11/25
+# 12345678
+# comprador: TESTUSER1744467970@testuser.com
+
+# vendedor: TESTUSER2018947212
+# fBvUrp2xi2
+
+##[1] {
+# [1]   success: false,
+# [1]   data: null,
+# [1]   errors: { phone: [ 'Contact already exists' ] },
+# [1]   error_code: 400
+# [1] }

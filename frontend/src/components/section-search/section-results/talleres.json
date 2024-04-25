@@ -1,72 +1,178 @@
 [
   {
-    "nombreTaller": "Taller A",
-    "ciudad": "Ciudad 1",
+    "nombreTaller": "ElectroTech",
+    "ciudad": ["Lanús", "La Plata", "Tigre", "Vicente López"],
     "calificación": 4,
-    "rubro": "Rubro 1",
-    "contacto": 123456789
+    "rubro": "Electricidad",
+    "contacto": 1122334455,
+    "imagen": "imgLogos/tallerElectricidad.jpg"
   },
   {
-    "nombreTaller": "Taller B",
-    "ciudad": "Ciudad 2",
-    "calificación": 3,
-    "rubro": "Rubro 2",
-    "contacto": 987654321
-  },
-  {
-    "nombreTaller": "Taller C",
-    "ciudad": "Ciudad 3",
+    "nombreTaller": "Mecánica Rápida",
+    "ciudad": ["Lanús","Lomas de Zamora", "Moreno", "Vicente López"],
     "calificación": 5,
-    "rubro": "Rubro 3",
-    "contacto": 555666777
+    "rubro": "Mecánica",
+    "contacto": 2233445566,
+    "imagen": "imgLogos/tallerMecanico.jpg"
   },
   {
-    "nombreTaller": "Taller D",
-    "ciudad": "Ciudad 2",
-    "calificación": 2,
-    "rubro": "Rubro 1",
-    "contacto": 111222333
-  },
-  {
-    "nombreTaller": "Taller E",
-    "ciudad": "Ciudad 2",
-    "calificación": 4,
-    "rubro": "Rubro 2",
-    "contacto": 444555666
-  },
-  {
-    "nombreTaller": "Taller F",
-    "ciudad": "Ciudad 3",
-    "calificación": 1,
-    "rubro": "Rubro 3",
-    "contacto": 777888999
-  },
-  {
-    "nombreTaller": "Taller G",
-    "ciudad": "Ciudad 1",
+    "nombreTaller": "Carpintería",
+    "ciudad": ["Pilar", "Quilmes", "La Plata", "Moreno"],
     "calificación": 3,
-    "rubro": "Rubro 1",
-    "contacto": 999888777
+    "rubro": "Carpintería",
+    "contacto": 3344556677,
+    "imagen": "imgLogos/tallerCarpinteria.jpg"
   },
   {
-    "nombreTaller": "Taller H",
-    "ciudad": "Ciudad 1",
-    "calificación": 5,
-    "rubro": "Rubro 2",
-    "contacto": 666555444
-  },
-  {
-    "nombreTaller": "Taller I",
-    "ciudad": "Ciudad 2",
+    "nombreTaller": "AquaFix",
+    "ciudad": ["Tigre", "Vicente López", "Moreno", "Pilar"],
     "calificación": 4,
-    "rubro": "Rubro 3",
-    "contacto": 333222111
+    "rubro": "Plomería",
+    "contacto": 4455667788,
+    "imagen": "imgLogos/tallerPlomeria.jpg"
   },
   {
-    "nombreTaller": "Taller J",
-    "ciudad": "Ciudad 3",
-    "calificación": 2,
-    "rubro": "Rubro 1",
-    "contacto": 888999000
+    "nombreTaller": "GreenThumb",
+    "ciudad": ["Lanús", "La Plata", "Tigre", "Lomas de Zamora"],
+    "calificación": 5,
+    "rubro": "Jardinería",
+    "contacto": 5566778899,
+    "imagen": "imgLogos/tallerJardineria.jpg"
+  },
+  {
+    "nombreTaller": "InfoMakers",
+    "ciudad": ["Lomas de Zamora", "Moreno", "Pilar", "Quilmes"],
+    "calificación": 4,
+    "rubro": "Informática",
+    "contacto": 6677889900,
+    "imagen": "imgLogos/tallerInformatica.jpg"
+  },
+  {
+    "nombreTaller": "TechLine",
+    "ciudad": ["Quilmes", "Vicente López", "Lomas de Zamora"],
+    "calificación": 3,
+    "rubro": "Telefonía",
+    "contacto": 7788990011,
+    "imagen": "imgLogos/tallerTelefonia.jpg"
+  },
+  {
+    "nombreTaller": "ElectroFix",
+    "ciudad": ["Lanús", "Tigre", "La Plata"],
+    "calificación": 4,
+    "rubro": "Electrónica",
+    "contacto": 8899001122,
+    "imagen": "imgLogos/tallerElectronica.jpg"
+  },
+  {
+    "nombreTaller": "HandyHelpers",
+    "ciudad": ["La Plata", "Lomas de Zamora", "Pilar"],
+    "calificación": 5,
+    "rubro": "Varios",
+    "contacto": 9900112233,
+    "imagen": "imgLogos/tallerVarios.jpg"
+  },
+  {
+    "nombreTaller": "Energetic Solutions",
+    "ciudad": ["Moreno", "Pilar", "Vicente López"],
+    "calificación": 3,
+    "rubro": "Electricidad",
+    "contacto": 1234567890,
+    "imagen": "imgLogos/tallerElectricidad2.jpg"
+  },
+  {
+    "nombreTaller": "AutoCare Experts",
+    "ciudad": ["Lanús", "La Plata", "Quilmes", "Tigre", "Vicente López"],
+    "calificación": 4,
+    "rubro": "Mecánica",
+    "contacto": 2345678901,
+    "imagen": "imgLogos/tallerMecanico2.jpg"
+  },
+  {
+    "nombreTaller": "WoodWorks",
+    "ciudad": ["Vicente López", "Lanús", "La Plata"],
+    "calificación": 5,
+    "rubro": "Carpintería",
+    "contacto": 3456789012,
+    "imagen": "imgLogos/tallerCarpinteria3.jpg"
+  },
+  {
+    "nombreTaller": "PipePros",
+    "ciudad": ["Lomas de Zamora", "La Plata"],
+    "calificación": 4,
+    "rubro": "Plomería",
+    "contacto": 4567890123,
+    "imagen": "imgLogos/tallerPlomeria2.jpg"
+  },
+  {
+    "nombreTaller": "GardenGurus",
+    "ciudad": ["Moreno", "Pilar", "Quilmes", "Lomas de Zamora"],
+    "calificación": 3,
+    "rubro": "Jardinería",
+    "contacto": 5678901234,
+    "imagen": "imgLogos/tallerJardineria2.jpg"
+  },
+  {
+    "nombreTaller": "CyberSolutions",
+    "ciudad": ["Lanús","Tigre", "Vicente López", "Lomas de Zamora", "Quilmes"],
+    "calificación": 4,
+    "rubro": "Informática",
+    "contacto": 6789012345,
+    "imagen": "imgLogos/tallerInformatica2.jpg"
+  },
+  {
+    "nombreTaller": "MobileMasters",
+    "ciudad": ["La Plata", "Lanús", "Lomas de Zamora"],
+    "calificación": 5,
+    "rubro": "Telefonía",
+    "contacto": 7890123456,
+    "imagen": "imgLogos/tallerTelefonia2.jpg"
+  },
+  {
+    "nombreTaller": "ElectroSmart",
+    "ciudad": ["Pilar", "Moreno", "La Plata", "Lomas de Zamora", "Quilmes"],
+    "calificación": 3,
+    "rubro": "Electrónica",
+    "contacto": 8901234567,
+    "imagen": "imgLogos/tallerElectronica2.jpg"
+  },
+  {
+    "nombreTaller": "JackOfAllTrades",
+    "ciudad": ["Quilmes", "Tigre", "Vicente López", "Pilar"],
+    "calificación": 4,
+    "rubro": "Varios",
+    "contacto": 9012345678,
+    "imagen": "imgLogos/tallerVarios2.jpg"
+  },
+  {
+    "nombreTaller": "EcoElectric",
+    "ciudad": ["Lanús", "La Plata", "Lomas de Zamora", "Quilmes", "Tigre"],
+    "calificación": 5,
+    "rubro": "Electricidad",
+    "contacto": 3456789123,
+    "imagen": "imgLogos/tallerElectricidad3.jpg"
+  },
+  {
+    "nombreTaller": "FixItRight",
+    "ciudad": ["Lanús","La Plata","Moreno", "Pilar", "Quilmes"],
+    "calificación": 3,
+    "rubro": "Mecánica",
+    "contacto": 4567891234,
+    "imagen": "imgLogos/tallerMecanico3.jpg"
+  },
+  {
+    "nombreTaller": "CraftyCarpenter",
+    "ciudad": ["Tigre", "Vicente López", "Lanús", "La Plata", "Moreno"],
+    "calificación": 4,
+    "rubro": "Carpintería",
+    "contacto": 5678912345,
+    "imagen": "imgLogos/tallerCarpinteria2.jpg"
+  },
+  {
+    "nombreTaller": "Hermanos Gomez",
+    "ciudad": ["Tigre", "Vicente López", "Lanús", "Moreno", "Pilar"],
+    "calificación": 4,
+    "rubro": "Plomería",
+    "contacto": 4567890123,
+    "imagen": "imgLogos/tallerPlomeria3.jpg"
   }
 ]

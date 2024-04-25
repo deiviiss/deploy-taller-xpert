@@ -13,16 +13,27 @@ export const SectionSearch = () => {
  
   const optionsCity = [
    {value: '', label: ''},
-   {value: 'Ciudad 1', label: 'Ciudad 1'},
-   {value: 'Ciudad 2', label: 'Ciudad 2'},
-   {value: 'Ciudad 3', label: 'Ciudad 3'},
+   {value: 'Lanús', label: 'Lanús'},
+   {value: 'La Plata', label: 'La Plata'},
+   {value: 'Lomas de Zamora', label: 'Lomas de Zamora'},
+   {value: 'Moreno', label: 'Moreno'},
+   {value: 'Pilar', label: 'Pilar'},
+   {value: 'Quilmes', label: 'Quilmes'},
+   {value: 'Tigre', label: 'Tigre'},
+   {value: 'Vicente López', label: 'Vicente López'},
   ]
  
   const optionsItem = [
    {value: '', label: ''},
-   {value: 'Rubro 1', label: 'Rubro 1'},
-   {value: 'Rubro 2', label: 'Rubro 2'},
-   {value: 'Rubro 3', label: 'Rubro 3'},
+   {value: 'Electricidad', label: 'Electricidad'},
+   {value: 'Mecánica', label: 'Mecánica'},
+   {value: 'Carpintería', label: 'Carpintería'},
+   {value: 'Plomería', label: 'Plomería'},
+   {value: 'Jardinería', label: 'Jardinería'},
+   {value: 'Informática', label: 'Informática'},
+   {value: 'Telefonía', label: 'Telefonía'},
+   {value: 'Electrónica', label: 'Electrónica'},
+   {value: 'Varios', label: 'Varios'},
   ]
   
   const handleSelectCity = (event: React.ChangeEvent<HTMLSelectElement>) => {

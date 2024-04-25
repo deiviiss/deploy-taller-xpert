@@ -5,19 +5,19 @@ import { Button } from "@/components/button/Button";
 import { CardItem } from "@/components/dashboard-orders/cardItem";
 import { NewClient } from "@/components/dashboard-orders/newClient";
 import { useEffect, useState } from "react";
-import { createReparation } from "../orderRequest";
 import { useSession } from "next-auth/react";
 import { Client, Products } from "../interface";
 import { NewItem } from "@/components/dashboard-orders/newItem";
 import ReactDOMServer from "react-dom/server";
 import Swal from "sweetalert2";
 import { Alert } from "@/components/icons/Alert";
+import { createReparation } from "../orderRequest";
 
 
 export default function OrdersPage() {
   const { data: session } = useSession()
   const [products, setProducts] = useState<Products[]>([])
-  const [client, setClient]=useState<Client>()
+  const [client, setClient] = useState<Client>()
   const [selectedProduct, setSelectedProduct] = useState<Products | null>(null)
 
   const date = new Date();
@@ -34,15 +34,18 @@ export default function OrdersPage() {
   }
 
   const guardarOrden = async () => {
+    console.log("guardar", products)
     try {
-      await createReparation(session, client, products)
+      await createReparation(client, products)
+
       Swal.fire({
         title: '¡Éxito!',
         text: 'La orden se ha guardado exitosamente.',
         confirmButtonColor: '#6264D5',
         confirmButtonText: 'Aceptar'
-      }).then(() => {
-        window.history.back;
+      }
+      ).then(() => {
+        window.history.go(-1);
       });
     } catch (error) {
       console.error("Error al guardar la orden: ", error);
@@ -73,8 +76,8 @@ export default function OrdersPage() {
   }
 
   useEffect(() => {
-    console.log("producto agr", products)
-  }, [products])
+    console.log("productos", products)
+  }, [products, session])
 
   return (
     <div>

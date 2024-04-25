@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { ZodError } from 'zod'
-import { HttpCodes } from '.'
+import { ErrorMessage, HttpCodes } from '.'
 
 interface ErrorType {
 	name: string
@@ -23,8 +23,10 @@ export const errorHandler = (
 		})*/
 		return res.status(HttpCodes.BAD_REQUEST).json({
 			message: 'Error de validación',
-			errors: (error.errors).map(e => `
-			${e.message.trim()}`.trim()),
+			errors: error.errors.map((e) =>
+				`
+			${e.message.trim()}`.trim(),
+			),
 		})
 	}
 
@@ -33,7 +35,9 @@ export const errorHandler = (
 		error.message === 'Service not found' ||
 		error.message === 'Invalid credentials' ||
 		error.message === 'Workshop not found' ||
-		error.message === 'User not found'
+		error.message === 'User not found' ||
+		error.message === ErrorMessage.REPARATION_NOT_FOUND ||
+    error.message === ErrorMessage.PRODUCT_NOT_FOUND
 	) {
 		return res.status(HttpCodes.NOT_FOUND).json({ message: error.message })
 	}
@@ -62,7 +66,10 @@ export const errorHandler = (
 			error: error.parent?.detail,
 		})
 	}
-	if (error.name === 'SequelizeDatabaseError') {
+	if (
+		error.name === 'SequelizeDatabaseError' ||
+		error.message === ErrorMessage.PDF_NOT_CREATED
+	) {
 		return res.status(HttpCodes.BAD_REQUEST).json({
 			message: error.message,
 			error,

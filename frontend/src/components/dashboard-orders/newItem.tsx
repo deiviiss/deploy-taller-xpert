@@ -20,7 +20,6 @@ export const NewItem = ({ setProducts, selectedProduct, setSelectedProduct }: Ne
         serial_number: '',
         issue_detail: '',
         note: '',
-        state: 'PENDING',
         warranty_date: '',
         warranty_invoice_number: '',
         revision_cost: '',
@@ -84,9 +83,8 @@ export const NewItem = ({ setProducts, selectedProduct, setSelectedProduct }: Ne
                 serial_number: formDataItem.serial_number,
                 issue_detail: formDataItem.issue_detail,
                 note: formDataItem.note,
-                state: 'PENDING',
-                warranty_date: formDataItem.warranty_date,
-                warranty_invoice_number: formDataItem.warranty_invoice_number,
+                ...(formDataItem.warranty_date && { warranty_date: formDataItem.warranty_date }),
+                ...(formDataItem.warranty_invoice_number && { warranty_invoice_number: formDataItem.warranty_invoice_number }),
                 revision_cost: formDataItem.revision_cost,
             }
             setProducts((prevProducts) => [...prevProducts, newProduct])

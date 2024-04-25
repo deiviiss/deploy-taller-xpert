@@ -20,7 +20,7 @@ export class Profile extends Model {
 
 	@BelongsTo(() => User)
 	user!: User
-	
+
 	@AllowNull(false)
 	@Column({
 		type: DataType.STRING,

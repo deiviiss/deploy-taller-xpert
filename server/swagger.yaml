@@ -98,8 +98,8 @@ components:
           type: string
           format: uuid
         ot_number:
-          type: integer
-          unique: true
+          type: string
+          format: uuid
         client_id:
           type: string
         assigned_user:
@@ -402,7 +402,7 @@ paths:
                   error:
                     type: string
     patch:
-      summary: Update user by ID
+      summary: Update user and profile data using user ID (only fullName and password in user and all attributes in profile)
       tags:
         - Users
       security:

@@ -12,3 +12,5 @@ export { authenticate, login } from './auth/login'
 export { getUserSessionServer } from './auth/getUserServerSession'
 export { logout } from './auth/logout'
 export { registerUser } from './auth/registerUser'
+
+export { sendReport } from './reports/reports'

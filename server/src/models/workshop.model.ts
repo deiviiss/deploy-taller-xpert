@@ -1,26 +1,22 @@
-import {
-	AllowNull,
-	BelongsTo,
-	Column,
-	DataType,
-	ForeignKey,
-	IsUrl,
-	Model,
-	Table,
-} from 'sequelize-typescript'
+import { AllowNull, BelongsTo, Column, DataType, ForeignKey, IsEmail, IsUrl, Model, Table, } from 'sequelize-typescript'
 import { User } from './user.models'
 
 export enum workshopCategory {
-	Electronica = 'electronica',
-	Mecanica = 'mecanica',
-	Varios = 'varios',
+	Electricidad = 'Electricidad',
+	Mecanica = 'Mecánica',
+	Carpinteria = 'Carpintería',
+	Plomeria = 'Plomería',
+	Jardineria = 'Jardinería',
+	Informatica = 'Informática',
+	Telefonia = 'Telefonía',
+	Electronica = 'Electrónica',
+	Varios = 'Varios',
 }
 
 @Table({
 	timestamps: false,
 	tableName: 'workshop',
 })
-
 export class Workshop extends Model {
 	@Column({
 		primaryKey: true,
@@ -42,27 +38,44 @@ export class Workshop extends Model {
 		type: DataType.STRING,
 		allowNull: false,
 	})
-	title!: string
+	name!: string
 
 	@IsUrl
 	@Column({
 		type: DataType.STRING,
 	})
-	photo_url!: string
+	logoImage!: string
 
 	@Column({
 		type: DataType.STRING,
 	})
-	description!: string
+	direction!: string
 
 	@Column({
 		type: DataType.STRING,
 	})
-	location!: string
+	city!: string
 
+	@Column({
+		type: DataType.STRING,
+	})
+	phone!: string
+
+	@Column({
+		type: DataType.STRING,
+	})
+	cuit!: string
+
+	@AllowNull(false)
 	@Column({
 		type: DataType.ENUM(...Object.values(workshopCategory)),
 	})
-	category!: workshopCategory
+	specializedField!: workshopCategory
 
+	@AllowNull(false)
+	@IsEmail
+	@Column({
+		type: DataType.STRING,
+	})
+	email!: string
 }

@@ -1,14 +1,16 @@
 "use client"
 
 import { Button } from "@/components/button/Button"
-import Star from "@/components/icons/Star"
+import { Star } from "@/components/icons/Star"
+import Image from "next/image"
 
 type WorkshopProp = {
   nombreTaller: string,
-  ciudad: string,
+  ciudad: string[],
   calificación: number,
   rubro: string,
-  contacto: number
+  contacto: number,
+  imagen: string
 }
 
 type ResultProp = {
@@ -23,9 +25,10 @@ export const CardResult = ({ key, workshop }: ResultProp) => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-x-12 items-center border border-black rounded shadow	 py-6 px-4 w-max">
+    <div className="flex flex-col lg:flex-row gap-x-12 items-center border border-[#B9B8B8] rounded shadow	 py-6 px-4 w-max">
       {/* logo del taller */}
-      <div className="bg-slate-300 w-[150px] h-[150px] rounded"></div>
+      {/* <div className="bg-slate-300 w-[150px] h-[150px] rounded"></div> */}
+      <Image src={`/${workshop.imagen}`} alt={`logo de ${workshop.nombreTaller}`} width={150} height={150}/>
 
       <div className="flex flex-col gap-4">
         <p className="font-black text-2xl">{workshop.nombreTaller}</p>

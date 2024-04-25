@@ -22,8 +22,7 @@ export const editTechnician = async (data: TechnicianWithoutId, id: string) => {
         },
         body: JSON.stringify({
           fullName: data.fullName,
-          email: data.email,
-          password: data.password
+          email: data.email
         }),
       }
     );

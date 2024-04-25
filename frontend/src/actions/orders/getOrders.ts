@@ -31,3 +31,27 @@ export const getOrders = async (): Promise<OrderResponse> => {
     return { ok: false, orders: [] }
   }
 }
+
+export const getCountOrders = async () => {
+  try {
+    const user = await getUserSessionServer()
+    if (!user) return { ok: false, orders: [] }
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/reparation`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    const orders = await response.json();
+    return orders.length
+
+  } catch (error) {
+    return { ok: false, orders: [] }
+  }
+}

@@ -7,7 +7,7 @@ import {
 	Table,
 	Unique,
 } from 'sequelize-typescript'
-import { Reparation } from '.'
+import { Reparation, Product } from '.'
 
 @Table({
 	timestamps: false,
@@ -48,12 +48,11 @@ export class Client extends Model {
 
 	@AllowNull(false)
 	@Column({
-		type: DataType.INTEGER,
+		type: DataType.STRING,
 	})
-	phone!: number
+	phone!: string
 
 	@AllowNull(false)
-	@Unique(true)
 	@Column({
 		type: DataType.STRING,
 	})
@@ -62,4 +61,7 @@ export class Client extends Model {
 	// falta cambiar la relacion de User por Workshop
 	@HasMany(() => Reparation)
 	reparations!: Reparation[]
+
+  	@HasMany(() => Product)
+	products!: Product[]
 }

@@ -29,7 +29,7 @@ export const Modal = ({ isModalOpen, closeModal, children, className }: Props) =
 
       <div className={
         clsx(
-          `fixed ${className} p-5 flex items-center justify-center bg-white z-20 shadow-2xl transform transition-all duration-300`,
+          `fixed ${className} p-5 flex items-center justify-center bg-white z-20 shadow-2xl transform transition-all duration-300 top-2`,
           {
             'opacity-0 pointer-events-none': !isModalOpen
           }

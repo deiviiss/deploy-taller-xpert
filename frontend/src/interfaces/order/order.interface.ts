@@ -20,7 +20,7 @@ export interface Product {
   workshop: null;
   issue_detail: string;
   note: null;
-  diagnostic: null;
+  diagnostic: null | string;
   state: null | string;
   is_paid: boolean | null;
   total_cost: null;
@@ -30,6 +30,8 @@ export interface Product {
   warranty_invoice_number: string;
   entry_date: Date;
   exit_date: Date;
+  uriMercadoPago: string;
+  updatedA: string;
   reparation_id: string;
   client_id: string;
 }
@@ -44,4 +46,5 @@ export interface Order {
   client: Client;
   products: Product[];
   user: null;
+  state: string;
 }

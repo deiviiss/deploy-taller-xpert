@@ -2,40 +2,31 @@
 
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Supplier } from '@/app/dashboard/suppliers/interface'
+import { createSupplier, editSupplier } from '@/app/dashboard/suppliers/supplierRequest'
+import { useSession } from 'next-auth/react'
 
 interface FormImputs {
-  company: string
+  name: string
   address: string
   phone: string
   city: string
   cuit: string
   email: string
-  seller: string
-  description: string
-}
-
-interface Supplier {
-  id: string
-  company: string
-  address: string
-  phone: string
-  city: string
-  cuit: string
-  email: string
-  seller: string
-  description: string
+  seller_name: string
+  categories: string
 }
 
 interface Props {
-  supplier: Supplier | null
   isEditSupplier: boolean
+  supplier?: Supplier
 }
 
 export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
   const router = useRouter()
-
+  const { data: session, status } = useSession()
   const [errorMessage, setErrorMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -47,31 +38,68 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
     formState: { errors }
   } = useForm<FormImputs>({
     defaultValues: {
-      company: supplier?.company || '',
+      name: supplier?.name || '',
       address: supplier?.address || '',
       phone: supplier?.phone || '',
       city: supplier?.city || '',
       cuit: supplier?.cuit || '',
       email: supplier?.email || '',
-      seller: supplier?.seller || ''
+      seller_name: supplier?.seller_name || ''
     }
   })
 
+  useEffect(() => {
+    if (supplier && isEditSupplier) {
+      reset({
+        name: supplier.name,
+        address: supplier.address,
+        phone: supplier.phone,
+        city: supplier.city,
+        cuit: supplier.cuit,
+        email: supplier.email,
+        seller_name: supplier.seller_name,
+        categories: supplier.categories
+      })
+      return
+    }
+  }, [supplier, isEditSupplier, reset])
+
   const onSubmit = async (data: FormImputs) => {
     setErrorMessage('')
-
+    setIsSubmitting(true)
     console.log('submitting')
 
-    reset({
-      company: '',
-      address: '',
-      phone: '',
-      city: '',
-      cuit: '',
-      email: '',
-      seller: '',
-      description: ''
-    })
+    if (!supplier) {
+      const res = await createSupplier(session, data)
+
+      if (res.ok) {
+        router.push('/dashboard/suppliers') // redirect to supplier listing
+      } else {
+        console.log('Error creating')
+      }
+    }
+
+    if (supplier && isEditSupplier) {
+      const res = await editSupplier(data, supplier.id, session)
+
+      if (res.ok) {
+        router.push('/dashboard/suppliers') // redirect to supplier listing
+      } else {
+        console.log('Error creating')
+      }
+    }
+
+    setIsSubmitting(false)
+    // reset({
+    //   name: '',
+    //   address: '',
+    //   phone: '',
+    //   city: '',
+    //   cuit: '',
+    //   email: '',
+    //   seller_name: '',
+    //   categories: ''
+    // })
   }
 
   return (
@@ -82,25 +110,19 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
             <div className='flex flex-col'>
               <div className='grid grid-cols-[200px,1fr] items-center'>
                 <label htmlFor='fullName'>Empresa</label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.company}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.company
-                      }
-                    )}
-                    type='text'
-                    {...register('company', { required: true })}
-                  />
-                )}
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                    {
+                      'border-red-500': errors.name
+                    }
+                  )}
+                  type='text'
+                  {...register('name', { required: true })}
+                />
               </div>
-              {errors.company?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+              {errors.name?.type === 'required' && (
+                <span className='text-red-500'>* El nombre de la empresa es requerido</span>
               )}
             </div>
           </div>
@@ -109,25 +131,19 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
             <div className='flex flex-col'>
               <div className='grid grid-cols-[200px,1fr] items-center'>
                 <label htmlFor='fullName'>Dirección</label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.address}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.address
-                      }
-                    )}
-                    type='text'
-                    {...register('address', { required: true })}
-                  />
-                )}
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                    {
+                      'border-red-500': errors.address
+                    }
+                  )}
+                  type='text'
+                  {...register('address', { required: true })}
+                />
               </div>
               {errors.address?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+                <span className='text-red-500'>* La dirección es requerida</span>
               )}
             </div>
           </div>
@@ -136,25 +152,20 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
             <div className='flex flex-col'>
               <div className='grid grid-cols-[200px,1fr] items-center'>
                 <label htmlFor='fullName'>Teléfono</label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.phone}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.phone
-                      }
-                    )}
-                    type='text'
-                    {...register('phone', { required: true })}
-                  />
-                )}
+
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                    {
+                      'border-red-500': errors.phone
+                    }
+                  )}
+                  type='text'
+                  {...register('phone', { required: true })}
+                />
               </div>
               {errors.phone?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+                <span className='text-red-500'>* El teléfono es requerido</span>
               )}
             </div>
           </div>
@@ -163,25 +174,19 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
             <div className='flex flex-col'>
               <div className='grid grid-cols-[200px,1fr] items-center'>
                 <label htmlFor='fullName'>Ciudad</label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.city}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.city
-                      }
-                    )}
-                    type='text'
-                    {...register('city', { required: true })}
-                  />
-                )}
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                    {
+                      'border-red-500': errors.city
+                    }
+                  )}
+                  type='text'
+                  {...register('city', { required: true })}
+                />
               </div>
               {errors.city?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+                <span className='text-red-500'>* La Ciudad es requerida</span>
               )}
             </div>
           </div>
@@ -190,25 +195,19 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
             <div className='flex flex-col'>
               <div className='grid grid-cols-[200px,1fr] items-center'>
                 <label htmlFor='fullName'>CUIT</label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.cuit}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.cuit
-                      }
-                    )}
-                    type='text'
-                    {...register('cuit', { required: true })}
-                  />
-                )}
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                    {
+                      'border-red-500': errors.cuit
+                    }
+                  )}
+                  type='text'
+                  {...register('cuit', { required: true })}
+                />
               </div>
               {errors.cuit?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+                <span className='text-red-500'>* El CUIT del proveedor es requerido</span>
               )}
             </div>
           </div>
@@ -217,25 +216,19 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
             <div className='flex flex-col'>
               <div className='grid grid-cols-[200px,1fr] items-center'>
                 <label htmlFor='fullName'>E-mail</label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.email}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.email
-                      }
-                    )}
-                    type='text'
-                    {...register('email', { required: true })}
-                  />
-                )}
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                    {
+                      'border-red-500': errors.email
+                    }
+                  )}
+                  type='text'
+                  {...register('email', { required: true })}
+                />
               </div>
               {errors.email?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+                <span className='text-red-500'>* El E-Mail del proveedor es requerido</span>
               )}
             </div>
           </div>
@@ -244,25 +237,19 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
             <div className='flex flex-col'>
               <div className='grid grid-cols-[200px,1fr] items-center'>
                 <label htmlFor='fullName'>Vendedor</label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.seller}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.seller
-                      }
-                    )}
-                    type='text'
-                    {...register('seller', { required: true })}
-                  />
-                )}
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                    {
+                      'border-red-500': errors.seller_name
+                    }
+                  )}
+                  type='text'
+                  {...register('seller_name', { required: true })}
+                />
               </div>
-              {errors.seller?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+              {errors.seller_name?.type === 'required' && (
+                <span className='text-red-500'>* El nombre del vendedor es requerido</span>
               )}
             </div>
           </div>
@@ -273,25 +260,16 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
                 <label htmlFor='fullName' className='mb-4'>
                   Descripción
                 </label>
-                {isEditSupplier === false && supplier ? (
-                  <div className='py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                    <p>{supplier?.description}</p>
-                  </div>
-                ) : (
-                  <input
-                    className={clsx(
-                      'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                      {
-                        'border-red-500': errors.description
-                      }
-                    )}
-                    type='text'
-                    {...register('description', { required: true })}
-                  />
-                )}
+                <input
+                  className={clsx(
+                    'py-2 rounded-lg border border-solid focus:outline-none bg-white pl-2'
+                  )}
+                  type='text'
+                  {...register('categories', { required: true })}
+                />
               </div>
-              {errors.description?.type === 'required' && (
-                <span className='text-red-500'>* El nombre completo del usuario es requerido</span>
+              {errors.categories?.type === 'required' && (
+                <span className='text-red-500'>* La descripción del vendedor es requerida</span>
               )}
             </div>
           </div>
@@ -300,8 +278,8 @@ export const SupplierForm = ({ isEditSupplier, supplier }: Props) => {
         </div>
       </div>
 
-      <div className='mb-3 flex gap-2'>
-        <button type='submit' className='text-white px-6 py-3 rounded bg-primary'>
+      <div className='flex gap-2 mb-3'>
+        <button type='submit' className='px-6 py-3 text-white rounded bg-primary'>
           {isSubmitting ? 'Guardando...' : 'Guardar'}
         </button>
         <button

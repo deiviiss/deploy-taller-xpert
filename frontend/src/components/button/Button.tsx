@@ -13,7 +13,7 @@ export const Button = ({ title, onClick }: ButtonProps) => {
   return (
     <button
       onClick={handleOnClick}
-      className='w-[200px] h-10 bg-primary hover:bg-white hover:text-primary rounded text-white text-base font-bold'
+      className='w-[200px] h-10 bg-primary hover:opacity-70 rounded text-white text-base font-bold'
     >
       {title}
     </button>

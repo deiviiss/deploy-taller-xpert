@@ -1,4 +1,4 @@
-import { SVGProps } from "react"
+import { SVGProps } from "react";
 
 export const Star = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -16,4 +16,3 @@ export const Star = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 )
-export default Star

@@ -4,6 +4,7 @@ import { getDateFormat } from "@/utils";
 import { getTechnicians, getOrders } from "@/actions";
 import Image from "next/image";
 import clsx from "clsx";
+import { getSuppliers } from "@/actions/suppliers/get-suppliers";
 
 export default async function DashboardPage({
   searchParams
@@ -18,15 +19,15 @@ export default async function DashboardPage({
   const technicians = response.technicians || []
 
   const { orders } = await getOrders()
-  console.log(orders)
+  const { suppliers } = await getSuppliers()
 
   const articles = orders.flatMap(order => order.products)
   return (
     <>
       {/*  section 1 */}
-      <div className="md:flex">
+      <div className={`md:flex`}>
         {/* cards */}
-        <CardsDashboard />
+        <CardsDashboard orders={orders} suppliers={suppliers} />
 
         {/*  technicians */}
         <div className="p-4 ml-4 border rounded-lg flex-grow flex-col gap-4">
@@ -71,16 +72,16 @@ export default async function DashboardPage({
                   {
                     articles.map((article, index) => (
                       <div key={index} className="flex w-full justify-between items-center p-4 rounded bg-secondary text-xs">
-                        <p className="font-semibold">000- {article.id.split('-').at(1)}</p>
+                        <p className={`${titleFont.className} font-semibold`}>ot-{article.id.split('-').at(1)}</p>
                         <p className="capitalize">{article.product_name}</p>
                         <p className={
                           clsx(
                             'border rounded-full h-6 py-1 px-5 flex justify-center items-center uppercase font-semibold',
                             {
                               'bg-[#F1CC5B] text-black': article.state === 'Pendiente' || article.state === null,
-                              'bg-[#B9B8B8] text-black': article.state === 'en espera',
-                              'bg-[#34A853] text-white': article.state === 'reparado',
-                              'bg-[#EB6196] text-white': article.state === 'entregado',
+                              'bg-[#B9B8B8] text-black': article.state === 'En espera',
+                              'bg-[#34A853] text-white': article.state === 'Reparado',
+                              'bg-[#EB6196] text-white': article.state === 'Pagado',
                               'bg-[#252525] text-white': article.state === 'devuelto',
                             }
                           )
@@ -111,18 +112,18 @@ export default async function DashboardPage({
                   {
                     orders.map((order, index) => (
                       <div key={index} className="flex w-full justify-between items-center p-4 rounded bg-secondary text-xs">
-                        <p className="font-semibold">000-{order.ot_number}</p>
+                        <p className={`${titleFont.className} font-semibold`}>ot-{order.ot_number}</p>
                         <p className="capitalize">{order.client.fullName}</p>
                         <p className={
                           clsx(
                             'border rounded-full h-6 py-1 px-5 flex justify-center items-center uppercase  text-white',
                             {
-                              'bg-violet': order.products[0]?.state === 'Closed',
-                              'bg-[#B9B8B8]': order.products[0]?.state === 'Openened',
+                              'bg-violet': order.state === 'Abierto',
+                              'bg-[#B9B8B8]': order.state === 'Cerrado',
                             }
                           )
                         }
-                        ><span>{order.products[0]?.state}</span></p>
+                        ><span>{order.state}</span></p>
                         <p>{getDateFormat(order.created_at)}</p>
                       </div>
                     ))

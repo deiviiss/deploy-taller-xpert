@@ -1,7 +1,7 @@
 import { MercadoPagoConfig, MerchantOrder, Preference } from 'mercadopago'
 import { PreferenceRequest } from 'mercadopago/dist/clients/preference/commonTypes'
 
-const client = new MercadoPagoConfig({
+export const client = new MercadoPagoConfig({
 	accessToken: process.env.MP_TOKEN as string,
 })
 
