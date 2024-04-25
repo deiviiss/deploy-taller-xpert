@@ -8,6 +8,7 @@ import { Technician } from "@/interfaces";
 import clsx from "clsx";
 import Image from "next/image";
 import { useState } from "react"
+import Swal from 'sweetalert2';
 
 interface Props {
   technicians: Technician[]
@@ -31,8 +32,23 @@ export const TechnicianGrid = ({ technicians }: Props) => {
     setTechnician(technician)
   }
 
-  const handleClickTrash = async (id: string) => {
+  const handleDelete = async (id: string) => {
     await deleteTechnician(id)
+  }
+
+  const handleClickTrash = async (id: string) => {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esto!",
+      showCancelButton: true,
+      confirmButtonColor: '#6264D5',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDelete(id)
+      }
+    })
   }
 
   const handleClickCard = async (id: string) => {

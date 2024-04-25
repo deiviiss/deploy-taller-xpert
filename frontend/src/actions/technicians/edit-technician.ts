@@ -22,27 +22,14 @@ export const editTechnician = async (data: TechnicianWithoutId, id: string) => {
         },
         body: JSON.stringify({
           fullName: data.fullName,
-          email: data.email
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
         }),
       }
     );
 
     if (!response.ok) return { ok: false }
-    //! AQUI SOLO TENGO EL ID DEL TECNICO, NECESITO EDITAR EL PROFILE DEL TECNICO, PERO EL ENDPOINT DE PROFILE NECESITA EL ID DEL PROFILE, NO DEL USUARIO
-    // const responseProfile = await fetch(
-    //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/profile/${id}`,
-    //   {
-    //     method: "PATCH",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: `Bearer ${user.token}`,
-    //     },
-    //    body: JSON.stringify({
-    //      phone: data.phone,
-    //      address: data.address
-    //    }),
-    //   }
-    // );
 
     revalidatePath('/dashboard/technicians')
     return { ok: true }

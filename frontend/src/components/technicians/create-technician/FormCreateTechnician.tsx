@@ -13,6 +13,14 @@ interface FormImputs {
   phone: string
   email: string
   password: string
+  profile: {
+    id: string
+    userId: string
+    fullName: string
+    address: string
+    phone: string
+    photo_url?: string
+  }
 }
 
 interface Props {
@@ -26,14 +34,14 @@ interface Props {
 export const FormCreateTechnician = ({ isFormAviable, setIsFormAviable, isEditTechnician, setIsEditTechnician, technician }: Props) => {
   const [errorMessage, setErrorMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-
+  console.log('user form')
+  console.log(technician)
   const { handleSubmit, register, formState: { isValid }, reset, formState: { errors } } = useForm<FormImputs>({
     defaultValues: {
-      fullName: technician?.fullName || '',
-      address: technician?.address || '',
-      phone: technician?.phone || '',
+      fullName: technician?.profile.fullName || '',
+      address: technician?.profile.address || '',
+      phone: technician?.profile.phone || '',
       email: technician?.email || '',
-      password: technician?.password || ''
     }
   })
 
@@ -41,9 +49,9 @@ export const FormCreateTechnician = ({ isFormAviable, setIsFormAviable, isEditTe
     // there are technician loaded and is in edit mode, reset the form with the technician data.
     if (technician && isEditTechnician) {
       reset({
-        fullName: technician.fullName,
-        address: technician.address,
-        phone: technician.phone,
+        fullName: technician.profile.fullName,
+        address: technician.profile.address,
+        phone: technician.profile.phone,
         email: technician.email,
         password: technician.password
       });
@@ -148,7 +156,7 @@ export const FormCreateTechnician = ({ isFormAviable, setIsFormAviable, isEditTe
                 {
                   isEditTechnician === false && technician ? (
                     <div className='h-10 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                      <p>{technician.address}</p>
+                      <p>{technician.profile.address}</p>
                     </div>
                   ) : (
                     <input
@@ -180,7 +188,7 @@ export const FormCreateTechnician = ({ isFormAviable, setIsFormAviable, isEditTe
                 {
                   isEditTechnician === false && technician ? (
                     <div className='h-10 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
-                      <p>{technician.phone}</p>
+                      <p>{technician.profile.phone}</p>
                     </div>
                   ) : (
                     <input
@@ -245,20 +253,39 @@ export const FormCreateTechnician = ({ isFormAviable, setIsFormAviable, isEditTe
                     <div className='h-10 rounded-lg border border-solid focus:outline-none bg-white pl-2 flex items-center text-primary'>
                       <p>{technician.password}</p>
                     </div>
-                  ) : (
-                    <input
-                      disabled={!isFormAviable}
-                      className={
-                        clsx(
-                          'h-10 rounded-lg border border-solid focus:outline-none bg-white pl-2',
-                          {
-                            'border-red-500': errors.password
-                          }
+                  ) : <>
+                    {
+                      !technician ? (
+                        <input
+                          disabled={!isFormAviable}
+                          className={
+                            clsx(
+                              'h-10 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                              {
+                                'border-red-500': errors.password
+                              }
+                            )
+                          } type="password"
+                          {...register('password', { required: true })}
+                        />
+                      ) : (
+                        (
+                          <input
+                            disabled={!isFormAviable}
+                            className={
+                              clsx(
+                                'h-10 rounded-lg border border-solid focus:outline-none bg-white pl-2',
+                                {
+                                  'border-red-500': errors.password
+                                }
+                              )
+                            } type="password"
+                            {...register('password')}
+                          />
                         )
-                      } type="password"
-                      {...register('password', { required: true })}
-                    />
-                  )
+                      )
+                    }
+                  </>
                 }
               </div>
               {

@@ -1,7 +1,11 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { textLogo } from '@/config/fonts'
 import { Dashboard, Orders, Technicians, Suppliers, Statistics, Workshop } from '@/components'
+import { useEffect, useState } from 'react'
+import { getUserSessionServer } from '@/actions'
+import { UserData } from '@/interfaces/userData/userdata.interface'
 
 const sideItems = [
   {
@@ -132,6 +136,20 @@ export const Sidebar = () => {
   const logoSidebar = '/logoSidebar.png'
   const tallerName = 'TechRepair'
 
+  const [userData, setUserData] = useState<UserData | undefined>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userDataFromServer = await getUserSessionServer();
+        setUserData(userDataFromServer);
+      } catch (error) {
+        console.error('Error al cargar los datos del usuario: ', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <nav className='w-[248px] h-screen min-h-[1024px] flex flex-col justify-around bg-primary shadow-xl px-6 py-[42px] text-white'>
       <div className='flex flex-col items-center gap-3'>
@@ -142,7 +160,7 @@ export const Sidebar = () => {
           height={80}
           className='rounded-full'
         />
-        <h1 className='text-xl font-black text-center capitalize'>{tallerName}</h1>
+        <h1 className='text-xl font-black text-center capitalize'>{userData?.workshop?.name}</h1>
       </div>
 
       {/* menu */}

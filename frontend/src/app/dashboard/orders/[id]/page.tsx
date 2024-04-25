@@ -27,8 +27,6 @@ export default function OrderId({ params }: { params: { id: string } }) {
     dataOrder()
   }, [params.id, session]);
 
-  console.log(dataResponse)
-
   if (loading) {
     return (
       <div className='h-3/4 flex justify-center items-center'>
@@ -55,7 +53,7 @@ export default function OrderId({ params }: { params: { id: string } }) {
         </div>
         <div className="relative flex flex-col gap-6 pt-12 pb-12 text-white p-4 border-[1px] rounded-lg border-[#B9B8B8] shadow-[0px_4px_4px_0px_#00000040] bg-gradient-to-b from-[#4F3E9C] to-[#6162D3]  ">
           <p className="flex gap-4 items-center">
-            <Image src="/direction.svg" alt="direction" width={24} height={24} />
+            <Image src="/direction.svg" alt="direction" width={24} height={24}  style={{ width: 'auto', height: 'auto' }}/>
             {dataResponse?.client?.address} - {dataResponse?.client?.city}
           </p>
           <p className="flex gap-4 items-center">
@@ -66,7 +64,7 @@ export default function OrderId({ params }: { params: { id: string } }) {
             <Image src="/email.svg" alt="email" width={24} height={24} />
             {dataResponse?.client?.email}
           </p>
-          <Image src="/human.svg" alt="human" className="absolute bottom-0 right-0 max-lg:hidden" width={200} height={200} />
+          <Image src="/human.svg" alt="human" className="absolute bottom-0 right-0 max-lg:hidden" width={200} height={200}  style={{ width: 'auto', height: 'auto' }}/>
         </div>
       </div>
       <div className="flex flex-col gap-4">

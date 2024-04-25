@@ -15,7 +15,6 @@ export default function ReparateId({ params }: { params: { id: string; idProduct
   const [loading, setLoading] = useState<boolean>(false);
   const [methodPayment, setMethodPayment] = useState(false);
 
-  console.log(dataResponse)
   useEffect(() => {
     setLoading(true);
     const dataOrder = async () => {
@@ -153,7 +152,7 @@ export default function ReparateId({ params }: { params: { id: string; idProduct
             />
           </div>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 relative">
           <h2 className="font-bold text-2xl">Diagnóstico</h2>
           <p className="flex gap-4 items-center">
             Técnico Asignado{" "}
@@ -224,14 +223,14 @@ export default function ReparateId({ params }: { params: { id: string; idProduct
                     Devuelto
                   </button>
                   <button onClick={() => setMethodPayment(true)} className="mt-4 p-2 pl-6 pr-6 bg-[#6264D5] text-white hover:opacity-70 rounded-md w-[170px] h-[55px]  flex items-center justify-center gap-2">
-                    <Image src="/succesDeliver.svg" alt="success" width={24} height={24} />
+                    <Image src="/succesDeliver.svg" alt="success" width={24} height={24}  style={{ width: 'auto', height: 'auto' }}/>
                     Entregar
                   </button>
                 </div>
               </div>
             </div>
           </form>
-          <div className="flex max-lg:justify-center gap-4 mt-8 max-lg:hidden">
+          <div className="flex max-lg:justify-center gap-4 mt-8 max-lg:hidden absolute bottom-0">
             {/* <Link
                   href={"/dashboard/orders"}
                   className="bg-primary text-white p-8 pt-2 pb-2 rounded-lg hover:opacity-70"
